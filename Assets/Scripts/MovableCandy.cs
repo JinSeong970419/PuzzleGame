@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovablePiece : MonoBehaviour
+public class MovableCandy : MonoBehaviour
 {
-    private GamePiece candy;
+    private GameCandy candy;
     private IEnumerator moveCoroutine;
 
     private void Awake()
     {
-        candy = GetComponent<GamePiece>();
+        candy = GetComponent<GameCandy>();
     }
 
     public void Move(int newX, int newY, float time)
@@ -29,15 +29,15 @@ public class MovablePiece : MonoBehaviour
         candy.X = newX;
         candy.Y = newY;
 
-        Vector3 startPos = transform.position;
-        Vector3 endPos = candy.GridRef.GetWorldPosition(newX, newY);
+        Vector3 startPosition = transform.position;
+        Vector3 endPosition = candy.GridRef.GetWorldPosition(newX, newY);
 
         for (float t = 0; t <= 1*time; t+=Time.deltaTime)
         {
-            candy.transform.position = Vector3.Lerp(startPos, endPos, t / time);
+            candy.transform.position = Vector3.Lerp(startPosition, endPosition, t / time);
             yield return 0;
         }
 
-        candy.transform.position = endPos;
+        candy.transform.position = endPosition;
     }
 }

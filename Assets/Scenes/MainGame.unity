@@ -2683,10 +2683,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui: {fileID: 496766495}
+  setting: {fileID: 992413881}
   movable: 21
   target: 5
   score: 0
-  setting: {fileID: 992413881}
 --- !u!1 &1694876700
 GameObject:
   m_ObjectHideFlags: 0
@@ -3146,7 +3146,7 @@ MonoBehaviour:
   yDim: 9
   fillTime: 0.2
   addScore: 50
-  piecePrefabs:
+  candyPrefabs:
   - type: 0
     prefab: {fileID: 8602978361851308675, guid: 6deeeb999f2a9b44bb653c86bcd8726e, type: 3}
   - type: 1

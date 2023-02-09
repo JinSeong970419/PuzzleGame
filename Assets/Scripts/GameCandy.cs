@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GamePiece : MonoBehaviour
+public class GameCandy : MonoBehaviour
 {
     private int x;
     public int X 
@@ -30,18 +30,18 @@ public class GamePiece : MonoBehaviour
         }
     }
 
-    private Grid grid;
-    public Grid GridRef { get { return grid; } }
+    private CandyBoard grid;
+    public CandyBoard GridRef { get { return grid; } }
 
-    private Grid.CandyType type;
-    public Grid.CandyType Type 
+    private CandyBoard.CandyType type;
+    public CandyBoard.CandyType Type 
     {
         get { return type; }
         set { type = value; }
     }
 
-    private MovablePiece movableComponent;
-    public MovablePiece MovableComponent
+    private MovableCandy movableComponent;
+    public MovableCandy MovableComponent
     {
         get { return movableComponent; }
     }
@@ -60,12 +60,12 @@ public class GamePiece : MonoBehaviour
 
     private void Awake()
     {
-        movableComponent = GetComponent<MovablePiece>();
+        movableComponent = GetComponent<MovableCandy>();
         colorComponent = GetComponent<ColorPiece>();
         clearableComponent = GetComponent<ClearablePiece>();
     }
 
-    public void Init(int _x, int _y, Grid _grid, Grid.CandyType _type)
+    public void Init(int _x, int _y, CandyBoard _grid, CandyBoard.CandyType _type)
     {
         x = _x;
         y= _y;
@@ -85,7 +85,7 @@ public class GamePiece : MonoBehaviour
 
     private void OnMouseUp()
     {
-        grid.ReleasePiece();
+        grid.CandyRelease();
     }
 
     public bool IsMovable()

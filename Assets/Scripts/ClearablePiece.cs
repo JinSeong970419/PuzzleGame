@@ -12,11 +12,11 @@ public class ClearablePiece : MonoBehaviour
         get { return isBeingCleared; }
     }
 
-    protected GamePiece piece;
+    protected GameCandy piece;
 
     private void Awake()
     {
-        piece = GetComponent<GamePiece>();
+        piece = GetComponent<GameCandy>();
     }
 
     public virtual void Clear()
