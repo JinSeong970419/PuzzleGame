@@ -341,11 +341,11 @@ public class CandyBoard : MonoBehaviour
         return null;
     }
 
-    public List<GameCandy> GetHorizonMatch(GameCandy piece, int newX, int newY)
+    public List<GameCandy> GetHorizonMatch(GameCandy candy, int newX, int newY)
     {
         List<GameCandy> horizontalPieces = new List<GameCandy>();
 
-        horizontalPieces.Add(piece);
+        horizontalPieces.Add(candy);
 
         for (int dir = 0; dir <= 1; dir++)
         {
@@ -364,7 +364,7 @@ public class CandyBoard : MonoBehaviour
 
                 if (x < 0 || x >= xDim) { break; }
 
-                if (candys[x, newY].IsColored() && candys[x, newY].ColorComponent.Color == piece.ColorComponent.Color)
+                if (candys[x, newY].IsColored() && candys[x, newY].ColorComponent.Color == candy.ColorComponent.Color)
                 {
                     horizontalPieces.Add(candys[x, newY]);
                 }
@@ -375,11 +375,11 @@ public class CandyBoard : MonoBehaviour
         return horizontalPieces;
     }
     
-    public List<GameCandy> GetverticalMatch(GameCandy piece, int newX, int newY)
+    public List<GameCandy> GetverticalMatch(GameCandy candy, int newX, int newY)
     {
         List<GameCandy> verticalPieces = new List<GameCandy>();
 
-        verticalPieces.Add(piece);
+        verticalPieces.Add(candy);
 
         for (int dir = 0; dir <= 1; dir++)
         {
@@ -398,7 +398,7 @@ public class CandyBoard : MonoBehaviour
 
                 if (y < 0 || y >= yDim) { break; }
 
-                if (candys[newX, y].IsColored() && candys[newX, y].ColorComponent.Color == piece.ColorComponent.Color)
+                if (candys[newX, y].IsColored() && candys[newX, y].ColorComponent.Color == candy.ColorComponent.Color)
                 {
                     verticalPieces.Add(candys[newX, y]);
                 }
@@ -409,7 +409,7 @@ public class CandyBoard : MonoBehaviour
         return verticalPieces;
     }
 
-    public List<GameCandy> GetsquareMatch(GameCandy piece, int newX, int newY)
+    public List<GameCandy> GetsquareMatch(GameCandy candy, int newX, int newY)
     {
         List<GameCandy> squareCandy = new List<GameCandy>();
 
