@@ -46,14 +46,14 @@ public class GameCandy : MonoBehaviour
         get { return movableComponent; }
     }
 
-    private ColorPiece colorComponent;
-    public ColorPiece ColorComponent
+    private ColorCandys colorComponent;
+    public ColorCandys ColorComponent
     {
         get { return colorComponent; }
     }
 
-    private ClearablePiece clearableComponent;
-    public ClearablePiece ClearableComponent
+    private ClearableCandy clearableComponent;
+    public ClearableCandy ClearableComponent
     {
         get { return clearableComponent; }
     }
@@ -61,8 +61,8 @@ public class GameCandy : MonoBehaviour
     private void Awake()
     {
         movableComponent = GetComponent<MovableCandy>();
-        colorComponent = GetComponent<ColorPiece>();
-        clearableComponent = GetComponent<ClearablePiece>();
+        colorComponent = GetComponent<ColorCandys>();
+        clearableComponent = GetComponent<ClearableCandy>();
     }
 
     public void Init(int _x, int _y, CandyBoard _grid, CandyBoard.CandyType _type)

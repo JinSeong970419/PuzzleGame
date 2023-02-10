@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 806092304959268733}
   - component: {fileID: 2186396184354073544}
   - component: {fileID: 426005146235571623}
-  - component: {fileID: 5986843871057106910}
+  - component: {fileID: 92522637748206940}
   m_Layer: 0
   m_Name: TowByTowCandy
   m_TagString: Untagged
@@ -150,7 +150,7 @@ BoxCollider2D:
   m_EdgeRadius: 0
 --- !u!95 &4590381469879966677
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -167,7 +167,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!114 &806092304959268733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,7 +207,7 @@ MonoBehaviour:
   colorSprites:
   - color: 4
     sprite: {fileID: -362577598, guid: 285525efd66f1d048a4ad93fa489c141, type: 3}
---- !u!114 &5986843871057106910
+--- !u!114 &92522637748206940
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -216,7 +216,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7818106211729026799}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fd5530f1465a8c4c81ab5e7dceb5a0e, type: 3}
+  m_Script: {fileID: 11500000, guid: 696152b8f034afc46954743124a21b24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   clearAnimation: {fileID: 7400000, guid: 6bd997868f0458c4ca4510ec5ac586bc, type: 2}

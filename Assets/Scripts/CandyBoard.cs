@@ -162,7 +162,7 @@ public class CandyBoard : MonoBehaviour
                 candys[x, 1] = newPiece.GetComponent<GameCandy>();
                 candys[x, 1].Init(x, 0, this, CandyType.NORMAL);
                 candys[x, 1].MovableComponent.Move(x, 1, fillTime);
-                candys[x, 1].ColorComponent.SetColor((ColorPiece.ColorType)Random.Range(0, candys[x, 1].ColorComponent.NumColors));
+                candys[x, 1].ColorComponent.SetColor((ColorCandys.ColorType)Random.Range(0, candys[x, 1].ColorComponent.NumColors));
                 movedCandy = true;
             }
         }
@@ -189,16 +189,16 @@ public class CandyBoard : MonoBehaviour
     }
 
     // 인접 여부 확인 함수
-    public bool IsAdjacent(GameCandy piece1, GameCandy piece2)
+    public bool IsAdjacent(GameCandy candy1, GameCandy candy2)
     {
-        return (piece1.X == piece2.X && (int)Mathf.Abs(piece1.Y - piece2.Y) == 1
-            || (piece1.Y == piece2.Y && (int)Mathf.Abs(piece1.X - piece2.X) == 1));
+        return (candy1.X == candy2.X && (int)Mathf.Abs(candy1.Y - candy2.Y) == 1
+            || (candy1.Y == candy2.Y && (int)Mathf.Abs(candy1.X - candy2.X) == 1));
     }
 
     // 캔디 위치를 바꾸는 함수
-    public void SwapCandy(GameCandy piece1, GameCandy piece2)
+    public void SwapCandy(GameCandy candy1, GameCandy candy2)
     {
-        if (piece1.IsMovable() && piece2.IsMovable())
+        if (candy1.IsMovable() && candy2.IsMovable())
         {
             GameManager.Instance.movable--;
             ui.SetMovable(GameManager.Instance.movable);
@@ -208,16 +208,16 @@ public class CandyBoard : MonoBehaviour
                 GameManager.Instance.GameClear();
             }
 
-            candys[piece1.X, piece1.Y] = piece2;
-            candys[piece2.X, piece2.Y] = piece1;
+            candys[candy1.X, candy1.Y] = candy2;
+            candys[candy2.X, candy2.Y] = candy1;
 
-            if (GetMatch(piece1, piece2.X, piece2.Y) != null || GetMatch(piece2, piece1.X, piece1.Y) != null)
+            if (GetMatch(candy1, candy2.X, candy2.Y) != null || GetMatch(candy2, candy1.X, candy1.Y) != null)
             {
-                int piece1X = piece1.X;
-                int piece1Y = piece1.Y;
+                int candy1X = candy1.X;
+                int candy1Y = candy1.Y;
 
-                piece1.MovableComponent.Move(piece2.X, piece2.Y, fillTime);
-                piece2.MovableComponent.Move(piece1X, piece1Y, fillTime);
+                candy1.MovableComponent.Move(candy2.X, candy2.Y, fillTime);
+                candy2.MovableComponent.Move(candy1X, candy1Y, fillTime);
 
                 ClearAllMatch();
 
@@ -226,43 +226,45 @@ public class CandyBoard : MonoBehaviour
 
                 StartCoroutine(Fill());
             }
-            else if (piece1.Type == CandyType.TWOBYTWO && !fillLimit)
+            else if (candy1.Type == CandyType.TWOBYTWO && !fillLimit)
             {
-                if (piece1.Type == CandyType.TWOBYTWO && piece1.IsClearable())
+                if (candy1.Type == CandyType.TWOBYTWO && candy1.IsClearable())
                 {
-                    ClearTwobyTwo twoBytwo = piece1.GetComponent<ClearTwobyTwo>();
-                    Vector2Int dir = new Vector2Int(piece2.X - piece1.X, piece2.Y - piece1.Y);
+                    ClearTwobyTwo twoBytwo = candy1.GetComponent<ClearTwobyTwo>();
+                    Vector2Int dir = new Vector2Int(candy2.X - candy1.X, candy2.Y - candy1.Y);
 
-                    ClearCandy(piece1.X, piece1.Y);
-                    StartCoroutine(RollTwoByTwo(piece1, dir, fillTime));
+                    ClearCandy(candy1.X, candy1.Y);
+
+                    StartCoroutine(RollTwoByTwo(candy1, dir, fillTime *0.5f));
                 }
+
+                StartCoroutine(Fill());
             }
             else  // 매칭 실패시 원래 위치로
             {
-                candys[piece1.X, piece1.Y] = piece1;
-                candys[piece2.X, piece2.Y] = piece2;
+                candys[candy1.X, candy1.Y] = candy1;
+                candys[candy2.X, candy2.Y] = candy2;
             }
 
         }
     }
 
-    public IEnumerator RollTwoByTwo(GameCandy piece, Vector2Int dir, float time)
+    public IEnumerator RollTwoByTwo(GameCandy candy, Vector2Int dir, float time)
     {
-        int Delx = piece.X + dir.x;
-        int Dely = piece.Y + dir.y;
+        int Delx = candy.X + dir.x;
+        int Dely = candy.Y + dir.y;
+        ClearCandy(Delx, Dely);
         while (true)
         {
-            piece.MovableComponent.Move(piece.X + dir.x, piece.Y + dir.y, time);
+            candy.MovableComponent.Move(candy.X + dir.x, candy.Y + dir.y, time);
 
-            if(candys[piece.X + dir.x, piece.Y + dir.y].Type != CandyType.HOLE)
+            if(candys[candy.X + dir.x, candy.Y + dir.y].Type != CandyType.HOLE )
             {
-                candys[piece.X + dir.x, piece.Y + dir.y].MovableComponent.Move(piece.X, piece.Y, time);
-                ClearCandy(piece.X + dir.x, piece.Y + dir.y);
+                ClearCandy(candy.X + dir.x, candy.Y + dir.y);
             }
             else // 구멍 위치에 도착할 경우
             {
-                piece.MovableComponent.Move(piece.X + dir.x, piece.Y + dir.y, time);
-                ClearCandy(Delx, Dely);
+                candy.MovableComponent.Move(candy.X + dir.x, candy.Y + dir.y, time);
 
                 GameManager.Instance.target--;
                 ui.SetTarget(GameManager.Instance.target);
@@ -274,17 +276,16 @@ public class CandyBoard : MonoBehaviour
             }
             yield return new WaitForSeconds(time);
         }
-        StartCoroutine(Fill());
     }
 
-    public void PressPiece(GameCandy piece)
+    public void PressPiece(GameCandy candy)
     {
-        pressed = piece;
+        pressed = candy;
     }
 
-    public void EnterPiece(GameCandy piece)
+    public void EnterPiece(GameCandy candy)
     {
-        entered = piece;
+        entered = candy;
     }
 
     public void CandyRelease()
@@ -296,13 +297,13 @@ public class CandyBoard : MonoBehaviour
     }
 
     // 매칭 확인
-    public List<GameCandy> GetMatch(GameCandy piece, int newX, int newY)
+    public List<GameCandy> GetMatch(GameCandy candy, int newX, int newY)
     {
-        if (piece.IsColored())
+        if (candy.IsColored())
         {
-            List<GameCandy> horizontal = GetHorizonMatch(piece, newX, newY);
-            List<GameCandy> vertical = GetverticalMatch(piece, newX, newY);
-            List<GameCandy> square = GetsquareMatch(piece, newX, newY);
+            List<GameCandy> horizontal = GetHorizonMatch(candy, newX, newY);
+            List<GameCandy> vertical = GetverticalMatch(candy, newX, newY);
+            List<GameCandy> square = GetsquareMatch(candy, newX, newY);
             List<GameCandy> matchingCandy = new List<GameCandy>();
 
             // 사각형
@@ -523,7 +524,7 @@ public class CandyBoard : MonoBehaviour
                             }
                             else if(specialCandyType == CandyType.TWOBYTWO && newPiece.IsColored() && match[0].IsColored())
                             {
-                                newPiece.ColorComponent.SetColor(ColorPiece.ColorType.ANY);
+                                newPiece.ColorComponent.SetColor(ColorCandys.ColorType.ANY);
                             }
                         }
                     }

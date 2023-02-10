@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ClearTwobyTwo : ClearablePiece
+public class ClearTwobyTwo : ClearableCandy
 {
-    private ColorPiece.ColorType color;
+    private ColorCandys.ColorType color;
 
     //public void Clear(GamePiece piece, Vector2 dir)
     //{

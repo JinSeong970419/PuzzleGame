@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ColorPiece : MonoBehaviour
+public class ColorCandys : MonoBehaviour
 {
     public enum ColorType
     {

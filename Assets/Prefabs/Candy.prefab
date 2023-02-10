@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 3790798395298675790}
   - component: {fileID: 2442055038723535099}
   - component: {fileID: -5017794159910840684}
-  - component: {fileID: 546317539293443757}
+  - component: {fileID: 8721919225488656346}
   m_Layer: 0
   m_Name: Candy
   m_TagString: Untagged
@@ -150,7 +150,7 @@ BoxCollider2D:
   m_EdgeRadius: 0
 --- !u!95 &1545273574
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -167,7 +167,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!114 &3790798395298675790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,7 +213,7 @@ MonoBehaviour:
     sprite: {fileID: 741323186, guid: 285525efd66f1d048a4ad93fa489c141, type: 3}
   - color: 3
     sprite: {fileID: 1818987742, guid: 285525efd66f1d048a4ad93fa489c141, type: 3}
---- !u!114 &546317539293443757
+--- !u!114 &8721919225488656346
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -222,7 +222,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6037974207311263196}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 618b7a6332d512b45b65bdb8225cf0d4, type: 3}
+  m_Script: {fileID: 11500000, guid: 696152b8f034afc46954743124a21b24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   clearAnimation: {fileID: 7400000, guid: e9cdabc6e98c87740a08fb2f5cf4ff60, type: 2}

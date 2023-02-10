@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ClearLine : ClearablePiece
+public class ClearLine : ClearableCandy
 {
     public bool isRow;
 

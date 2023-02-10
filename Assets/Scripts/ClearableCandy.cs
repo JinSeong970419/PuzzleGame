@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ClearablePiece : MonoBehaviour
+public class ClearableCandy : MonoBehaviour
 {
     public AnimationClip clearAnimation;
 
